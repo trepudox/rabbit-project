@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cargoservice
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none # update # validate
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_ADDRESS:localhost}:3306/rabbitproject?characterEncoding=UTF-8
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
+    driver-class: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8083

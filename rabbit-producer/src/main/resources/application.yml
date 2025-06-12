@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: rabbit-producer
+
+server:
+  port: 8081
