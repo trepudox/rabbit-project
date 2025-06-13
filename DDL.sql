@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS rabbitproject;
+
+USE rabbitproject;
+
+CREATE TABLE IF NOT EXISTS Cargo(
+	id INT NOT NULL AUTO_INCREMENT,
+    funcao VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS Pessoa(
+	id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    cargo_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(cargo_id) REFERENCES Cargo(id) ON DELETE SET NULL
+);
+
