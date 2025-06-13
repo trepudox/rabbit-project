@@ -1,0 +1,72 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db-data:/usr/db-data
+    ports:
+      - 3306:3306
+    networks:
+      - default
+
+  bff:
+    build: ./bff
+    ports:
+      - 8080:8080
+    networks:
+      - default
+    restart: on-failure
+
+  rabbit-producer:
+    build: ./rabbit-producer
+    ports:
+      - 8081:8081
+    networks:
+      - default
+    restart: on-failure
+
+  pessoa-service:
+    build: ./pessoa-service
+    environment:
+      - MYSQL_ADDRESS=172.19.0.1
+    links:
+      - mysql
+    ports:
+      - 8082:8082
+    networks:
+      - default
+    restart: on-failure
+
+  cargo-service:
+    build: ./cargo-service
+    environment:
+      - MYSQL_ADDRESS=172.19.0.1
+    links:
+      - mysql
+    ports:
+      - 8083:8083
+    networks:
+      - default
+    restart: on-failure
+
+volumes:
+  rabbitmq_data:
+  db-data:
+    name: db-data
+    external: true
+
+networks:
+  default:
+    name: default-network1
+    driver: bridge
+    external: true
