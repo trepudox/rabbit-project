@@ -7,7 +7,12 @@ import java.util.Optional;
 
 public interface DatabaseOutputPort {
 
+    PessoaDTO save(PessoaDTO pessoaDTO);
+
     List<PessoaDTO> getAll();
+
     Optional<PessoaDTO> getById(Long id);
+
+    void deleteById(Long id);
 
 }
