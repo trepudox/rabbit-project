@@ -9,6 +9,15 @@ public class PessoaDTO {
     private LocalDate dataNascimento;
     private Long cargoId;
 
+    public PessoaDTO() {}
+
+    public PessoaDTO(Long id, String nome, LocalDate dataNascimento, Long cargoId) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.cargoId = cargoId;
+    }
+
     public Long getId() {
         return id;
     }
