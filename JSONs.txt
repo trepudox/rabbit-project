@@ -1,0 +1,9 @@
+-- Cargo:
+Create:
+{"funcao": "Developer", "descricao": "Developer"}
+
+Update:
+{"id": 1, "funcao": "Developer", "descricao": "Developer Java ah é"}
+
+Delete:
+{"id": 1}
