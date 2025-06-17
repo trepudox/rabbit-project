@@ -13,6 +13,15 @@ spring:
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:root}
     driver-class: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: ${RABBITMQ_ADDRESS:localhost}
+    port: 5672
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+rabbitmq:
+  queue:
+    name: cargo-queue
 
 server:
   port: 8083
