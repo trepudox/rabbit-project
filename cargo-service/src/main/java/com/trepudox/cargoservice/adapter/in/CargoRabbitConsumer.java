@@ -41,7 +41,6 @@ public class CargoRabbitConsumer {
             log.warn("The message was rejected");
         }
 
-
     }
 
     private void processMessage(String action, CargoDTO cargoDTO) {
