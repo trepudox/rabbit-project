@@ -6,11 +6,12 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Pessoa")
+@Table(name = "pessoa")
 @Data
 public class PessoaModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
