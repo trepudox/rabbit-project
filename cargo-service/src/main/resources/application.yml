@@ -20,8 +20,12 @@ spring:
     password: ${RABBITMQ_PASSWORD:guest}
 
 rabbitmq:
-  queue:
-    name: cargo-queue
+  consumer:
+    queue:
+      name: cargo-queue
+  producer:
+    exchange: rabbit-project
+    routing-key: cargo-queue-dlq
 
 server:
   port: 8083
