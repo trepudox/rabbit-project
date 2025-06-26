@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeanInitializerConfig {
+public class GenericBeanInitializerConfig {
 
     @Bean
     public CargoService cargoService(DatabaseOutputPort databaseOutputPort) {
@@ -18,7 +18,7 @@ public class BeanInitializerConfig {
     @Bean
     public Gson gson() {
         return new GsonBuilder()
-//                .setDateFormat(/*TODO*/)
+//                .setDateFormat(/*TODO: config do gson*/)
                 .create();
     }
 
