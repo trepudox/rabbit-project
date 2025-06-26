@@ -22,6 +22,4 @@ public class BeanInitializerConfig {
                 .create();
     }
 
-    // TODO: criar um bean do rabbit pra fazer o ack manual
-
 }
