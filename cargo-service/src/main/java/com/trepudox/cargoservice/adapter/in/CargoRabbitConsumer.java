@@ -41,7 +41,6 @@ public class CargoRabbitConsumer {
             sendMessageToDLQ(message, channel, deliveryTag);
             log.warn("The message was rejected");
         }
-
     }
 
     private void processMessage(String action, CargoDTO cargoDTO) {
@@ -63,5 +62,4 @@ public class CargoRabbitConsumer {
             channel.basicReject(deliveryTag, true);
         }
     }
-
 }
