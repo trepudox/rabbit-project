@@ -19,13 +19,13 @@ services:
     networks:
       - default
 
-  bff:
-    build: ./bff
-    ports:
-      - 8080:8080
-    networks:
-      - default
-    restart: on-failure
+#  bff:
+#    build: ./bff
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - default
+#    restart: on-failure
 
   rabbit-producer:
     build: ./rabbit-producer
