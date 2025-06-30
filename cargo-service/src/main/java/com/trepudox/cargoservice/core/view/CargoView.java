@@ -1,14 +1,14 @@
-package com.trepudox.cargoservice.core.dto;
+package com.trepudox.cargoservice.core.view;
 
-public class CargoDTO {
+public class CargoView {
 
     private Long id;
     private String funcao;
     private String descricao;
 
-    public CargoDTO() {}
+    public CargoView() {}
 
-    public CargoDTO(Long id, String funcao, String descricao) {
+    public CargoView(Long id, String funcao, String descricao) {
         this.id = id;
         this.funcao = funcao;
         this.descricao = descricao;

@@ -1,6 +1,6 @@
 package com.trepudox.cargoservice.core.service;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.core.exception.EntityNotFoundException;
 import com.trepudox.cargoservice.core.port.out.DatabaseOutputPort;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,11 +28,11 @@ class CargoServiceTest {
     @InjectMocks
     private CargoService cargoService;
 
-    private CargoDTO cargoDTO;
+    private CargoView cargoView;
 
     @BeforeEach
     void setUp() {
-        cargoDTO = new CargoDTO(1L, "Desenvolvedor", "Desenvolvedor de Software");
+        cargoView = new CargoView(1L, "Desenvolvedor", "Desenvolvedor de Software");
     }
 
     @Nested
@@ -41,15 +41,15 @@ class CargoServiceTest {
         @Test
         @DisplayName("Deve criar um cargo com sucesso")
         void testCreate_Success() {
-            when(databaseOutputPort.save(any(CargoDTO.class))).thenReturn(cargoDTO);
+            when(databaseOutputPort.save(any(CargoView.class))).thenReturn(cargoView);
 
-            CargoDTO result = cargoService.create(cargoDTO);
+            CargoView result = cargoService.create(cargoView);
 
             assertNotNull(result);
-            assertEquals(cargoDTO.getId(), result.getId());
-            assertEquals(cargoDTO.getFuncao(), result.getFuncao());
-            assertEquals(cargoDTO.getDescricao(), result.getDescricao());
-            verify(databaseOutputPort, times(1)).save(cargoDTO);
+            assertEquals(cargoView.getId(), result.getId());
+            assertEquals(cargoView.getFuncao(), result.getFuncao());
+            assertEquals(cargoView.getDescricao(), result.getDescricao());
+            verify(databaseOutputPort, times(1)).save(cargoView);
         }
 
     }
@@ -60,10 +60,10 @@ class CargoServiceTest {
         @Test
         @DisplayName("Deve retornar todos os cargos")
         void testGetAll_Success() {
-            List<CargoDTO> cargoList = List.of(cargoDTO);
+            List<CargoView> cargoList = List.of(cargoView);
             when(databaseOutputPort.getAll()).thenReturn(cargoList);
 
-            List<CargoDTO> result = cargoService.getAll();
+            List<CargoView> result = cargoService.getAll();
 
             assertNotNull(result);
             assertFalse(result.isEmpty());
@@ -76,7 +76,7 @@ class CargoServiceTest {
         void testGetAll_EmptyList() {
             when(databaseOutputPort.getAll()).thenReturn(Collections.emptyList());
 
-            List<CargoDTO> result = cargoService.getAll();
+            List<CargoView> result = cargoService.getAll();
 
             assertNotNull(result);
             assertTrue(result.isEmpty());
@@ -90,12 +90,12 @@ class CargoServiceTest {
         @Test
         @DisplayName("Deve retornar um cargo pelo ID com sucesso")
         void testGetById_Success() {
-            when(databaseOutputPort.getById(1L)).thenReturn(Optional.of(cargoDTO));
+            when(databaseOutputPort.getById(1L)).thenReturn(Optional.of(cargoView));
 
-            CargoDTO result = cargoService.getById(1L);
+            CargoView result = cargoService.getById(1L);
 
             assertNotNull(result);
-            assertEquals(cargoDTO.getId(), result.getId());
+            assertEquals(cargoView.getId(), result.getId());
             verify(databaseOutputPort, times(1)).getById(1L);
         }
 
@@ -118,11 +118,11 @@ class CargoServiceTest {
         @Test
         @DisplayName("Deve atualizar um cargo com sucesso")
         void testUpdate_Success() {
-            CargoDTO updatedCargo = new CargoDTO(1L, "Desenvolvedor Sênior", "Desenvolvedor de Software Sênior");
-            when(databaseOutputPort.getById(1L)).thenReturn(Optional.of(cargoDTO));
+            CargoView updatedCargo = new CargoView(1L, "Desenvolvedor Sênior", "Desenvolvedor de Software Sênior");
+            when(databaseOutputPort.getById(1L)).thenReturn(Optional.of(cargoView));
             when(databaseOutputPort.save(updatedCargo)).thenReturn(updatedCargo);
 
-            CargoDTO result = cargoService.update(updatedCargo);
+            CargoView result = cargoService.update(updatedCargo);
 
             assertNotNull(result);
             assertEquals(updatedCargo.getFuncao(), result.getFuncao());
@@ -135,14 +135,14 @@ class CargoServiceTest {
         @DisplayName("Deve lançar EntityNotFoundException ao tentar atualizar um cargo inexistente")
         void testUpdate_NotFound() {
             long id = 2L;
-            CargoDTO nonExistentCargo = new CargoDTO(id, "Cargo Inexistente", "Descrição");
+            CargoView nonExistentCargo = new CargoView(id, "Cargo Inexistente", "Descrição");
             when(databaseOutputPort.getById(id)).thenReturn(Optional.empty());
 
             EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> cargoService.update(nonExistentCargo));
 
             assertEquals("Pessoa com id %d não encontrado".formatted(id), exception.getMessage());
             verify(databaseOutputPort, times(1)).getById(id);
-            verify(databaseOutputPort, never()).save(any(CargoDTO.class));
+            verify(databaseOutputPort, never()).save(any(CargoView.class));
         }
     }
 

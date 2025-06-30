@@ -1,6 +1,6 @@
 package com.trepudox.cargoservice.adapter.out;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.core.port.out.DatabaseOutputPort;
 
 import com.trepudox.cargoservice.infra.mapper.CargoMapper;
@@ -19,25 +19,25 @@ public class CargoRepositoryAdapater implements DatabaseOutputPort {
     private final CargoRepository cargoRepository;
 
     @Override
-    public CargoDTO save(CargoDTO cargoDTO) {
-        CargoModel cargoModel = CargoMapper.INSTANCE.cargoDTOToCargoModel(cargoDTO);
+    public CargoView save(CargoView cargoView) {
+        CargoModel cargoModel = CargoMapper.INSTANCE.cargoViewToCargoModel(cargoView);
         cargoModel = cargoRepository.save(cargoModel);
 
-        return CargoMapper.INSTANCE.cargoModelToCargoDTO(cargoModel);
+        return CargoMapper.INSTANCE.cargoModelToCargoView(cargoModel);
     }
 
     @Override
-    public List<CargoDTO> getAll() {
-        return CargoMapper.INSTANCE.cargoModelListToCargoDTOList(cargoRepository.findAll());
+    public List<CargoView> getAll() {
+        return CargoMapper.INSTANCE.cargoModelListToCargoViewList(cargoRepository.findAll());
     }
 
     @Override
-    public Optional<CargoDTO> getById(Long id) {
+    public Optional<CargoView> getById(Long id) {
         Optional<CargoModel> pessoaModelOptional = cargoRepository.findById(id);
 
         if (pessoaModelOptional.isPresent()) {
-            CargoDTO cargoDTO = CargoMapper.INSTANCE.cargoModelToCargoDTO(pessoaModelOptional.get());
-            return Optional.of(cargoDTO);
+            CargoView cargoView = CargoMapper.INSTANCE.cargoModelToCargoView(pessoaModelOptional.get());
+            return Optional.of(cargoView);
         }
 
         return Optional.empty();

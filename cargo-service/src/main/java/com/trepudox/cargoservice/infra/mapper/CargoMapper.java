@@ -1,6 +1,6 @@
 package com.trepudox.cargoservice.infra.mapper;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.infra.persistence.model.CargoModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,9 +13,9 @@ public interface CargoMapper {
 
     CargoMapper INSTANCE = Mappers.getMapper(CargoMapper.class);
 
-    CargoModel cargoDTOToCargoModel(CargoDTO cargoDTO);
+    CargoModel cargoViewToCargoModel(CargoView cargoView);
 
-    CargoDTO cargoModelToCargoDTO(CargoModel cargoModel);
+    CargoView cargoModelToCargoView(CargoModel cargoModel);
 
-    List<CargoDTO> cargoModelListToCargoDTOList(List<CargoModel> cargoModelList);
+    List<CargoView> cargoModelListToCargoViewList(List<CargoModel> cargoModelList);
 }

@@ -1,7 +1,7 @@
 package com.trepudox.cargoservice.core.service;
 
 import com.trepudox.cargoservice.core.port.in.CargoInputPort;
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.core.exception.EntityNotFoundException;
 import com.trepudox.cargoservice.core.port.out.DatabaseOutputPort;
 
@@ -17,29 +17,29 @@ public class CargoService implements CargoInputPort {
     private final DatabaseOutputPort databaseOutputPort;
 
     @Override
-    public CargoDTO create(CargoDTO cargoDTO) {
-        return databaseOutputPort.save(cargoDTO);
+    public CargoView create(CargoView cargoView) {
+        return databaseOutputPort.save(cargoView);
     }
 
     @Override
-    public List<CargoDTO> getAll() {
+    public List<CargoView> getAll() {
         return databaseOutputPort.getAll();
     }
 
     @Override
-    public CargoDTO getById(Long id) {
-        Optional<CargoDTO> cargoDTOOptional = databaseOutputPort.getById(id);
+    public CargoView getById(Long id) {
+        Optional<CargoView> cargoDTOOptional = databaseOutputPort.getById(id);
 
         return cargoDTOOptional
                 .orElseThrow(() -> new EntityNotFoundException("Cargo com id %d não encontrado".formatted(id)));
     }
 
     @Override
-    public CargoDTO update(CargoDTO cargoDTO) {
-        final Long cargoId = cargoDTO.getId();
+    public CargoView update(CargoView cargoView) {
+        final Long cargoId = cargoView.getId();
 
         if (databaseOutputPort.getById(cargoId).isPresent()) {
-            return databaseOutputPort.save(cargoDTO);
+            return databaseOutputPort.save(cargoView);
         } else {
             throw new EntityNotFoundException("Pessoa com id %d não encontrado".formatted(cargoId));
         }

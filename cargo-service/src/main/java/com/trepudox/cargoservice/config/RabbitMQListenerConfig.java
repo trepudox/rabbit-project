@@ -1,4 +1,4 @@
-package com.trepudox.cargoservice.infra.config;
+package com.trepudox.cargoservice.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;

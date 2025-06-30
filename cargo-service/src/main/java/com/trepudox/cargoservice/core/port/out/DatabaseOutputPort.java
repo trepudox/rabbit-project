@@ -1,17 +1,17 @@
 package com.trepudox.cargoservice.core.port.out;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface DatabaseOutputPort {
 
-    CargoDTO save(CargoDTO cargoDTO);
+    CargoView save(CargoView cargoView);
 
-    List<CargoDTO> getAll();
+    List<CargoView> getAll();
 
-    Optional<CargoDTO> getById(Long id);
+    Optional<CargoView> getById(Long id);
 
     void deleteById(Long id);
 

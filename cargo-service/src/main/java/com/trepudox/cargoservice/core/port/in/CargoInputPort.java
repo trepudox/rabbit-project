@@ -1,18 +1,18 @@
 package com.trepudox.cargoservice.core.port.in;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 
 import java.util.List;
 
 public interface CargoInputPort {
 
-    CargoDTO create(CargoDTO cargoDTO);
+    CargoView create(CargoView cargoView);
 
-    CargoDTO getById(Long id);
+    CargoView getById(Long id);
 
-    List<CargoDTO> getAll();
+    List<CargoView> getAll();
 
-    CargoDTO update(CargoDTO cargoDTO);
+    CargoView update(CargoView cargoView);
 
     void deleteById(Long id);
 

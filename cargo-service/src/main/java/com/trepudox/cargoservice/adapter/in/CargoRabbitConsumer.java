@@ -2,7 +2,7 @@ package com.trepudox.cargoservice.adapter.in;
 
 import com.rabbitmq.client.Channel;
 import com.trepudox.cargoservice.adapter.out.CargoRabbitDlqProducer;
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.core.port.in.CargoInputPort;
 import com.trepudox.cargoservice.infra.mapper.JsonMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +31,8 @@ public class CargoRabbitConsumer {
         log.info("Delivery Tag : {} - ActionHeader: {} - Message: {}", deliveryTag, actionHeader, messageContent);
 
         try {
-            CargoDTO cargoDTO = jsonMapper.fromJson(messageContent, CargoDTO.class);
-            processMessage(actionHeader, cargoDTO);
+            CargoView cargoView = jsonMapper.fromJson(messageContent, CargoView.class);
+            processMessage(actionHeader, cargoView);
             channel.basicAck(deliveryTag, false);
 
             log.info("Message with delivery tag '{}' was processed and acknowledged successfully", deliveryTag);
@@ -43,11 +43,11 @@ public class CargoRabbitConsumer {
         }
     }
 
-    private void processMessage(String action, CargoDTO cargoDTO) {
+    private void processMessage(String action, CargoView cargoView) {
         switch (action.toLowerCase()) {
-            case "create" -> cargoInputPort.create(cargoDTO);
-            case "update" -> cargoInputPort.update(cargoDTO);
-            case "delete" -> cargoInputPort.deleteById(cargoDTO.getId());
+            case "create" -> cargoInputPort.create(cargoView);
+            case "update" -> cargoInputPort.update(cargoView);
+            case "delete" -> cargoInputPort.deleteById(cargoView.getId());
             default -> throw new IllegalArgumentException("No action defined for '%s'".formatted(action));
         }
     }

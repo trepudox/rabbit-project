@@ -1,4 +1,4 @@
-package com.trepudox.cargoservice.infra.config;
+package com.trepudox.cargoservice.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,7 +18,6 @@ public class GenericBeanInitializerConfig {
     @Bean
     public Gson gson() {
         return new GsonBuilder()
-//                .setDateFormat(/*TODO: config do gson*/)
                 .create();
     }
 

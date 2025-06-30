@@ -1,6 +1,6 @@
 package com.trepudox.cargoservice.adapter.in;
 
-import com.trepudox.cargoservice.core.dto.CargoDTO;
+import com.trepudox.cargoservice.core.view.CargoView;
 import com.trepudox.cargoservice.core.port.in.CargoInputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ public class CargoController {
     private final CargoInputPort cargoInputPort;
 
     @GetMapping("/")
-    public ResponseEntity<List<CargoDTO>> getAll() {
-        List<CargoDTO> pessoaDTOList = cargoInputPort.getAll();
+    public ResponseEntity<List<CargoView>> getAll() {
+        List<CargoView> pessoaDTOList = cargoInputPort.getAll();
 
         return ResponseEntity.status(200).body(pessoaDTOList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CargoDTO> getById(@PathVariable Long id) {
-        CargoDTO pessoaDTO = cargoInputPort.getById(id);
+    public ResponseEntity<CargoView> getById(@PathVariable Long id) {
+        CargoView pessoaDTO = cargoInputPort.getById(id);
 
         return ResponseEntity.status(200).body(pessoaDTO);
     }
