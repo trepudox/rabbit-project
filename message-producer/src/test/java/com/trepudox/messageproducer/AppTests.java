@@ -1,4 +1,4 @@
-package com.trepudox.rabbitproducer;
+package com.trepudox.messageproducer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

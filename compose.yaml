@@ -27,8 +27,8 @@ services:
 #      - default
 #    restart: on-failure
 
-  rabbit-producer:
-    build: ./rabbit-producer
+  message-producer:
+    build: ./message-producer
     ports:
       - 8081:8081
     networks:

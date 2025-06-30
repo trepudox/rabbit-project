@@ -1,4 +1,4 @@
-package com.trepudox.rabbitproducer;
+package com.trepudox.messageproducer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

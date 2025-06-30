@@ -1,6 +1,6 @@
 spring:
   application:
-    name: rabbit-producer
+    name: message-producer
 
 server:
   port: 8081
