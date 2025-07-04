@@ -1,0 +1,6 @@
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
+LABEL maintainer="trepudox"
+WORKDIR /work/
+COPY target/*-runner /work/application
+EXPOSE 8080
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

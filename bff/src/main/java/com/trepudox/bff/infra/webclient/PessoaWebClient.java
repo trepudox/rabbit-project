@@ -1,4 +1,4 @@
 package com.trepudox.bff.infra.webclient;
 
-public interface PessoaWebclient {
+public interface PessoaWebClient {
 }

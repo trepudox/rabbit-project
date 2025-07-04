@@ -1,13 +1,12 @@
-package com.trepudox.bff.core.data.response;
+package com.trepudox.bff.infra.controller.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CargoResponse {
+public class CreateCargoControllerRequest {
 
-    private Long id;
     private String funcao;
     private String descricao;
 

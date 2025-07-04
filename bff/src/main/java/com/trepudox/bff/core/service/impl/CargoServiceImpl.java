@@ -1,10 +1,12 @@
 package com.trepudox.bff.core.service.impl;
 
-import com.trepudox.bff.core.data.request.CreateCargoRequest;
-import com.trepudox.bff.core.data.request.UpdateCargoRequest;
-import com.trepudox.bff.core.data.response.CargoResponse;
+import com.trepudox.bff.core.dto.CargoDTO;
+import com.trepudox.bff.core.mapper.CargoCoreMapper;
+import com.trepudox.bff.infra.controller.data.request.CreateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.request.UpdateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.response.CargoControllerResponse;
 import com.trepudox.bff.core.service.CargoService;
-import com.trepudox.bff.infra.webclient.CargoWebclient;
+import com.trepudox.bff.infra.webclient.impl.CargoWebClientImpl;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,29 +18,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CargoServiceImpl implements CargoService {
 
-    private final CargoWebclient cargoWebclient;
+    private final CargoWebClientImpl cargoWebclient;
 
     @Override
-    public CargoResponse create(CreateCargoRequest createCargoRequest) {
-        return new CargoResponse(1L, "Java Developer", "A crazy man");
+    public CargoControllerResponse create(CreateCargoControllerRequest createCargoControllerRequest) {
+        return new CargoControllerResponse(1L, "Java Developer", "A crazy man");
     }
 
     @Override
-    public List<CargoResponse> getAll() {
-        return List.of(
-                new CargoResponse(1L, "Java Developer", "A crazy man"),
-                new CargoResponse(2L, "Fireman", "A cool guy")
-        );
+    public List<CargoControllerResponse> getAll() {
+        List<CargoDTO> cargoDTOList = cargoWebclient.getAll();
+        return CargoCoreMapper.INSTANCE.cargoDTOListToCargoControllerResponseList(cargoDTOList);
     }
 
     @Override
-    public CargoResponse getById(long id) {
-        return new CargoResponse(id, "Java Developer", "A crazy man");
+    public CargoControllerResponse getById(long id) {
+        CargoDTO cargoDTO = cargoWebclient.getById(id);
+        return CargoCoreMapper.INSTANCE.cargoDTOToCargoControllerResponse(cargoDTO);
     }
 
     @Override
-    public CargoResponse update(UpdateCargoRequest updateCargoRequest) {
-        return new CargoResponse(1L, "Java Developer", "A crazy man");
+    public CargoControllerResponse update(UpdateCargoControllerRequest updateCargoControllerRequest) {
+        return new CargoControllerResponse(1L, "Java Developer", "A crazy man");
     }
 
     @Override

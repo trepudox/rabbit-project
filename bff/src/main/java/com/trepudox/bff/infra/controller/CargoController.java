@@ -1,8 +1,8 @@
 package com.trepudox.bff.infra.controller;
 
-import com.trepudox.bff.core.data.request.CreateCargoRequest;
-import com.trepudox.bff.core.data.request.UpdateCargoRequest;
-import com.trepudox.bff.core.data.response.CargoResponse;
+import com.trepudox.bff.infra.controller.data.request.CreateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.request.UpdateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.response.CargoControllerResponse;
 import com.trepudox.bff.core.service.CargoService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -22,31 +22,31 @@ public class CargoController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(CreateCargoRequest createCargoRequest) {
-        CargoResponse cargoResponse = cargoService.create(createCargoRequest);
-        return Response.status(Response.Status.CREATED).entity(cargoResponse).build();
+    public Response create(CreateCargoControllerRequest createCargoControllerRequest) {
+        CargoControllerResponse cargoControllerResponse = cargoService.create(createCargoControllerRequest);
+        return Response.status(Response.Status.CREATED).entity(cargoControllerResponse).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        List<CargoResponse> cargoResponseList = cargoService.getAll();
-        return Response.ok(cargoResponseList).build();
+        List<CargoControllerResponse> cargoControllerResponseList = cargoService.getAll();
+        return Response.ok(cargoControllerResponseList).build();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@RestPath long id) {
-        CargoResponse cargoResponse = cargoService.getById(id);
-        return Response.ok(cargoResponse).build();
+        CargoControllerResponse cargoControllerResponse = cargoService.getById(id);
+        return Response.ok(cargoControllerResponse).build();
     }
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(UpdateCargoRequest updateCargoRequest) {
-        CargoResponse cargoResponse = cargoService.update(updateCargoRequest);
-        return Response.ok(cargoResponse).build();
+    public Response update(UpdateCargoControllerRequest updateCargoControllerRequest) {
+        CargoControllerResponse cargoControllerResponse = cargoService.update(updateCargoControllerRequest);
+        return Response.ok(cargoControllerResponse).build();
     }
 
     @DELETE

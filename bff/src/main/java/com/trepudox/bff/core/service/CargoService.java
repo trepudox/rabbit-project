@@ -1,20 +1,20 @@
 package com.trepudox.bff.core.service;
 
-import com.trepudox.bff.core.data.request.CreateCargoRequest;
-import com.trepudox.bff.core.data.request.UpdateCargoRequest;
-import com.trepudox.bff.core.data.response.CargoResponse;
+import com.trepudox.bff.infra.controller.data.request.CreateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.request.UpdateCargoControllerRequest;
+import com.trepudox.bff.infra.controller.data.response.CargoControllerResponse;
 
 import java.util.List;
 
 public interface CargoService {
 
-    CargoResponse create(CreateCargoRequest createCargoRequest);
+    CargoControllerResponse create(CreateCargoControllerRequest createCargoControllerRequest);
 
-    List<CargoResponse> getAll();
+    List<CargoControllerResponse> getAll();
 
-    CargoResponse getById(long id);
+    CargoControllerResponse getById(long id);
 
-    CargoResponse update(UpdateCargoRequest updateCargoRequest);
+    CargoControllerResponse update(UpdateCargoControllerRequest updateCargoControllerRequest);
 
     void deleteById(Long id);
 
