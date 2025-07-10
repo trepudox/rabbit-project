@@ -15,6 +15,6 @@ CREATE TABLE IF NOT EXISTS pessoa(
     data_nascimento DATE NOT NULL,
     cargo_id INT,
     PRIMARY KEY(id),
-    FOREIGN KEY(cargo_id) REFERENCES Cargo(id) ON DELETE SET NULL
+    FOREIGN KEY(cargo_id) REFERENCES cargo(id) ON DELETE SET NULL
 );
 
