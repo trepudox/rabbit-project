@@ -18,6 +18,12 @@ services:
       - 3306:3306
     networks:
       - default
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=root"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   bff:
    build:
@@ -48,6 +54,9 @@ services:
     networks:
       - default
     restart: on-failure
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   cargo-service:
     build: ./cargo-service
@@ -60,6 +69,9 @@ services:
     networks:
       - default
     restart: on-failure
+    depends_on:
+      mysql:
+        condition: service_healthy
 
 volumes:
   rabbitmq_data:
