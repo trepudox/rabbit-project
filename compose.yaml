@@ -1,15 +1,19 @@
 services:
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
+    container_name: rp-rabbitmq
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    hostname: rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - default-network
 
   mysql:
     image: mysql
+    container_name: rp-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
@@ -17,7 +21,7 @@ services:
     ports:
       - 3306:3306
     networks:
-      - default
+      - default-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=root"]
       interval: 10s
@@ -26,25 +30,28 @@ services:
       start_period: 10s
 
   bff:
-   build:
-    context: ./bff
-    dockerfile: Dockerfile.native
-   ports:
+    build:
+      context: ./bff
+      dockerfile: Dockerfile.native
+    container_name: rp-bff
+    ports:
      - 8080:8080
-   networks:
-     - default
-   restart: on-failure
+    networks:
+     - default-network
+    restart: on-failure
 
   message-producer:
     build: ./message-producer
+    container_name: rp-message-producer
     ports:
       - 8081:8081
     networks:
-      - default
+      - default-network
     restart: on-failure
 
   pessoa-service:
     build: ./pessoa-service
+    container_name: rp-pessoa-service
     environment:
       - MYSQL_ADDRESS=172.19.0.1
     links:
@@ -52,7 +59,7 @@ services:
     ports:
       - 8082:8082
     networks:
-      - default
+      - default-network
     restart: on-failure
     depends_on:
       mysql:
@@ -60,14 +67,16 @@ services:
 
   cargo-service:
     build: ./cargo-service
+    container_name: rp-cargo-service
     environment:
       - MYSQL_ADDRESS=172.19.0.1
+      - RABBITMQ_ADDRESS=rabbitmq
     links:
       - mysql
     ports:
       - 8083:8083
     networks:
-      - default
+      - default-network
     restart: on-failure
     depends_on:
       mysql:
@@ -76,11 +85,7 @@ services:
 volumes:
   rabbitmq_data:
   db-data:
-    name: db-data
-    external: true
 
 networks:
-  default:
-    name: default-network1
+  default-network:
     driver: bridge
-    external: true
