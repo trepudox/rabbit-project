@@ -24,7 +24,7 @@ rabbitmq:
     queue:
       name: cargo-queue
   producer:
-    exchange: rabbit-project
+    exchange: rabbit-project-exchange
     routing-key: cargo-queue-dlq
 
 server:
