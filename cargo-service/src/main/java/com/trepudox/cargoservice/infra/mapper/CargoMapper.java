@@ -5,10 +5,9 @@ import com.trepudox.cargoservice.infra.persistence.model.CargoModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Mapper(imports = {LocalDateTime.class})
+@Mapper
 public interface CargoMapper {
 
     CargoMapper INSTANCE = Mappers.getMapper(CargoMapper.class);

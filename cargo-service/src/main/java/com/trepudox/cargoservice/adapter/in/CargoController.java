@@ -18,7 +18,7 @@ public class CargoController {
 
     private final CargoInputPort cargoInputPort;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<CargoView>> getAll() {
         List<CargoView> pessoaDTOList = cargoInputPort.getAll();
 
