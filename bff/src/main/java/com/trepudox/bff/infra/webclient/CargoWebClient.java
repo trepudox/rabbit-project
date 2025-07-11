@@ -6,14 +6,8 @@ import java.util.List;
 
 public interface CargoWebClient {
 
-    void create();
-
     List<CargoDTO> getAll();
 
     CargoDTO getById(long id);
-
-    void update();
-
-    void delete(long id);
 
 }
