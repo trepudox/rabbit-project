@@ -1,9 +1,9 @@
-package com.trepudox.bff.infra.webclient.data.response;
+package com.trepudox.bff.infra.webclient.data.request;
 
 import lombok.Data;
 
 @Data
-public class CargoRestResponse {
+public class UpdateCargoRestClientRequest {
 
     private Long id;
     private String funcao;
