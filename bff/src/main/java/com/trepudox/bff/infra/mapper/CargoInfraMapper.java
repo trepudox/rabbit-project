@@ -1,7 +1,7 @@
 package com.trepudox.bff.infra.mapper;
 
 import com.trepudox.bff.core.dto.CargoDTO;
-import com.trepudox.bff.infra.webclient.data.response.CargoRestResponse;
+import com.trepudox.bff.infra.webclient.data.response.CargoRestClientResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,8 +12,8 @@ public interface CargoInfraMapper {
 
     CargoInfraMapper INSTANCE = Mappers.getMapper(CargoInfraMapper.class);
 
-    CargoDTO cargoRestResponseToCargoDTO(CargoRestResponse cargoRestResponse);
+    CargoDTO cargoRestClientResponseToCargoDTO(CargoRestClientResponse cargoRestClientResponse);
 
-    List<CargoDTO> cargoRestResponseListToCargoDTOList(List<CargoRestResponse> cargoRestResponseList);
+    List<CargoDTO> cargoRestClientResponseListToCargoDTOList(List<CargoRestClientResponse> cargoRestClientResponseList);
 
 }

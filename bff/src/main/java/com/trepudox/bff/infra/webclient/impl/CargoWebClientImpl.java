@@ -24,7 +24,7 @@ public class CargoWebClientImpl implements CargoWebClient {
         RestResponse<List<CargoRestClientResponse>> response = cargoRestClient.getAll();
         List<CargoRestClientResponse> body = response.getEntity();
 
-        return CargoInfraMapper.INSTANCE.cargoRestResponseListToCargoDTOList(body);
+        return CargoInfraMapper.INSTANCE.cargoRestClientResponseListToCargoDTOList(body);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CargoWebClientImpl implements CargoWebClient {
         RestResponse<CargoRestClientResponse> response = cargoRestClient.getById(id);
         CargoRestClientResponse body = response.getEntity();
 
-        return CargoInfraMapper.INSTANCE.cargoRestResponseToCargoDTO(body);
+        return CargoInfraMapper.INSTANCE.cargoRestClientResponseToCargoDTO(body);
     }
 
 }
