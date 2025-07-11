@@ -34,6 +34,8 @@ services:
       context: ./bff
       dockerfile: Dockerfile.native
     container_name: rp-bff
+    links:
+      - rabbitmq
     ports:
      - 8080:8080
     networks:
@@ -43,6 +45,8 @@ services:
   message-producer:
     build: ./message-producer
     container_name: rp-message-producer
+    links:
+      - rabbitmq
     ports:
       - 8081:8081
     networks:
@@ -54,8 +58,10 @@ services:
     container_name: rp-pessoa-service
     environment:
       - MYSQL_ADDRESS=172.19.0.1
+      - RABBITMQ_ADDRESS=rabbitmq
     links:
       - mysql
+      - rabbitmq
     ports:
       - 8082:8082
     networks:
@@ -73,6 +79,7 @@ services:
       - RABBITMQ_ADDRESS=rabbitmq
     links:
       - mysql
+      - rabbitmq
     ports:
       - 8083:8083
     networks:
