@@ -1,3 +1,7 @@
+# comando pro docker recriar as imagens e subir novos containeres (só das APIs)
+
+docker compose up --force-recreate --build bff message-producer pessoa-service cargo-service
+
 # buildar o bff (quarkus nativo)
 
 mvn package -Pnative -Dquarkus.native.container-build=true
